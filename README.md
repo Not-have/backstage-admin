@@ -1,29 +1,20 @@
 # vue3-admin
 
-## Project setup
-```
+```text
+依赖下载：
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+运行：
 npm run serve
-```
 
-### Compiles and minifies for production
-```
+打包：
 npm run build
-```
 
-### Run your unit tests
-```
+测试打包：
 npm run test:unit
-```
 
-### Lints and fixes files
-```
+链接和修复文件：
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## vue3的后台管理程序
