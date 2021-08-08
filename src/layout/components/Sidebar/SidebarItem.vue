@@ -1,40 +1,50 @@
 <template>
     <div v-if="!item.hidden">
-        <!-- 一个孩子元素 -->
-        <template v-if="hasOneShowingChild">
-            {{onlyOneChild}}
-            <el-menu-item
-                :index="resolvePath(onlyOneChild.path)"
-                :class="{'submenu-title-noDropdown':!isNest}"
+        <template
+            v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren) && !item.alwaysShow"
+        >
+            <app-link
+                v-if="onlyOneChild.meta"
+                :to="resolvePath(onlyOneChild.path)"
             >
-                <item
-                    :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
-                    :title="onlyOneChild.meta.title"
-                />
-            </el-menu-item>
+                <el-menu-item
+                    :index="resolvePath(onlyOneChild.path)"
+                    :class="{'submenu-title-noDropdown':!isNest}"
+                >
+                    <i :class="item.meta.icon"></i>
+                    <span>{{item.meta.title}}</span>
+                </el-menu-item>
+            </app-link>
         </template>
-        <!-- 多个孩子元素 -->
 
+        <el-submenu
+            v-else
+            :index="resolvePath(item.path)"
+            popper-append-to-body
+        >
+            <template #title>
+                <i :class="item.meta.icon"></i>
+                <span>{{item.meta.title}}</span>
+            </template>
+            <sidebar-item
+                v-for="child in item.children"
+                :key="child.path"
+                :is-nest="true"
+                :item="child"
+                :base-path="resolvePath(child.path)"
+                class="nest-menu"
+            />
+        </el-submenu>
     </div>
 </template>
 
 <script>
-/**
- * 注：这块要引入path，需要在tsconfig.json中添加node，如下：
- * "types": [
-        "node",
-        "webpack-env",
-        "jest"
-    ],
- */
 import path from 'path'
-import { computed, reactive, ref, toRefs } from 'vue'
-import { isExternal } from "@/utils/validate"
+import { isExternal } from '@/utils/validate'
+import AppLink from './Link'
 export default {
     name: 'SidebarItem',
-    components: {
-
-    },
+    components: { AppLink },
     props: {
         item: {
             type: Object,
@@ -49,60 +59,39 @@ export default {
             default: ''
         }
     },
-    setup(props) {
-        /**
-         * @description: 
-         * @param {*} children
-         * @param {*} parent
-         * @return {*}
-         */
-        const hasOneShowingChild = computed(() => {
-            if (props.item.children) {
-                const showingChildren = props.item.children.filter((item) => {
-                    if (item.hidden) {
-                        return false
-                    } else {
-                        return true
-                    }
-                })
-                if (showingChildren.length === 0) {
-                    return true
-                }
-                if (showingChildren.length === 1) {
-                    return true
-                }
-            }
-            return false
-        })
-
-        let onlyOneChild = computed(() => {
-            let obj = {}
-            const showChild = props.item.children.filter(item => {
-                if (!item.hidden) {
-                    obj = item
+    data() {
+        this.onlyOneChild = null
+    },
+    methods: {
+        hasOneShowingChild(children = [], parent) {
+            const showingChildren = children.filter(item => {
+                if (item.hidden) {
+                    return false
+                } else {
+                    this.onlyOneChild = item
                     return true
                 }
             })
-            if (showChild.length === 0) {
-                return { ...props.item, path: '', noShowingChildren: true }
-            } else {
-                return obj
-            }
-        })
 
-        function resolvePath(routePath) {
+            if (showingChildren.length === 1) {
+                return true
+            }
+
+            if (showingChildren.length === 0) {
+                this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
+                return true
+            }
+            return false
+        },
+        resolvePath(routePath) {
             if (isExternal(routePath)) {
                 return routePath
             }
-            if (isExternal(props.basePath)) {
-                return props.basePath
+            if (isExternal(this.basePath)) {
+                return this.basePath
             }
-            return path.resolve(props.basePath, routePath)
+            return path.resolve(this.basePath, routePath)
         }
-        return { hasOneShowingChild, onlyOneChild, resolvePath }
     }
 }
 </script>
-
-<style scoped>
-</style>

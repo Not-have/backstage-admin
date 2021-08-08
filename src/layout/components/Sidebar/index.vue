@@ -6,7 +6,7 @@
         <el-scrollbar class="wrap-sidebar">
             <!--  -->
             <el-menu
-                default-active=""
+                :default-active="activeMenu()"
                 :collapse="opened"
                 :background-color="backgroundColor"
                 :text-color="textColor"
@@ -15,7 +15,12 @@
                 mode="vertical"
             >
                 <!-- 内部的结构树 -->
-                <sidebar-item v-for="router in routers" :key="router.path" :item="router" :base-path="router.path" />
+                <sidebar-item
+                    v-for="router in routers"
+                    :key="router.path"
+                    :item="router"
+                    :base-path="router.path"
+                />
             </el-menu>
         </el-scrollbar>
     </div>
@@ -26,7 +31,7 @@ import { computed } from '@vue/runtime-core'
 import Logo from "./Logo.vue"
 import SidebarItem from "./SidebarItem.vue"
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 export default {
     name: 'Sidebar',
     components: {
@@ -36,6 +41,7 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
+        const route = useRoute();
         let showLogo = computed(() => {
             return true
         })
@@ -53,11 +59,18 @@ export default {
          * @description: 获取路由信息
          * @param {*}
          * @return {*}
-         */        
+         */
         const routers = computed(() => {
             return router.options.routes
         })
-        return { showLogo, opened, backgroundColor, textColor, routers }
+        function activeMenu() {
+            const { meta, path } = route;
+            if (meta.activeMenu) {
+                return meta.activeMenu
+            }
+            return path
+        }
+        return { showLogo, opened, backgroundColor, textColor, routers, activeMenu }
     }
 }
 </script>
