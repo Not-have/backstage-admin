@@ -8,6 +8,7 @@
 <script>
 import * as THREE from "three"; //引入Threejs
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { onMounted } from 'vue';
 export default {
     name: 'Threejs',
     components: {
@@ -118,9 +119,9 @@ export default {
 
             renderer.render(scene, camera);
         }
-
-        window.onload = initThree;
-
+        onMounted(() => {
+            initThree();
+        })
         function initPoints() {
             const hot = require("@/assets/images/hot.png");
             let pointTexture = new THREE.TextureLoader().load(hot);

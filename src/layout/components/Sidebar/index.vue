@@ -4,7 +4,6 @@
         <!-- <logo /> -->
         <!-- wrap-class	包裹容器的自定义类名 -->
         <el-scrollbar class="wrap-sidebar">
-            <!--  -->
             <el-menu
                 :default-active="activeMenu()"
                 :collapse="opened"

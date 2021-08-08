@@ -9,7 +9,7 @@
                 <navbar />
             </div>
             <!-- 内容 -->
-            <!-- <app-main /> -->
+            <app-main class="content" />
         </div>
     </div>
 </template>
@@ -49,6 +49,15 @@ export default {
     height: 100%;
     width: 100%;
 }
+.content{
+    position: absolute;
+    height:100%;
+    top:0;
+    left:210px;
+    width: calc(100% - #{$sideBarWidth});
+}
+
+
 /**
 侧边栏（.sidebar-container 这个是侧边栏的类名）：
 1、侧边栏默认宽度事$sideBarWidth决定
