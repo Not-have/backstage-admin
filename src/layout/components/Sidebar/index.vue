@@ -14,46 +14,8 @@
                 :collapse-transition="true"
                 mode="vertical"
             >
-                <el-submenu index="1">
-                    <template #title>
-                        <i class="el-icon-location"></i>
-                        <span>导航一</span>
-                    </template>
-                    <el-menu-item-group>
-                        <template #title>分组一</template>
-                        <el-menu-item index="1-1">选项1</el-menu-item>
-                        <el-menu-item index="1-2">选项2</el-menu-item>
-                    </el-menu-item-group>
-                    <el-menu-item-group title="分组2">
-                        <el-menu-item index="1-3">选项3</el-menu-item>
-                    </el-menu-item-group>
-                    <el-submenu index="1-4">
-                        <template #title>选项4</template>
-                        <el-menu-item index="1-4-1">选项1</el-menu-item>
-                    </el-submenu>
-                </el-submenu>
-                <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
-                    <template #title>导航二</template>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <i class="el-icon-setting"></i>
-                    <template #title>导航四</template>
-                </el-menu-item>
-                <el-submenu index="5">
-                    <template #title>
-                        <i class="el-icon-location"></i>
-                        <span>导航一</span>
-                    </template>
-                    <el-menu-item-group>
-                        <template #title>分组一</template>
-                        <el-menu-item index="5-1">选项1</el-menu-item>
-                        <el-menu-item index="5-2">选项2</el-menu-item>
-                    </el-menu-item-group>
-                    <el-menu-item-group title="分组2">
-                        <el-menu-item index="5-3">选项3</el-menu-item>
-                    </el-menu-item-group>
-                </el-submenu>
+                <!-- 内部的结构树 -->
+                <sidebar-item v-for="router in routers" :key="router.path" :item="router" :base-path="router.path" />
             </el-menu>
         </el-scrollbar>
     </div>
@@ -62,14 +24,18 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import Logo from "./Logo.vue"
+import SidebarItem from "./SidebarItem.vue"
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 export default {
     name: 'Sidebar',
     components: {
-        Logo
+        Logo,
+        SidebarItem
     },
     setup() {
         const store = useStore();
+        const router = useRouter();
         let showLogo = computed(() => {
             return true
         })
@@ -82,13 +48,22 @@ export default {
         const textColor = computed(() => {
             return "#fff"
         })
-        return { showLogo, opened, backgroundColor,textColor }
+        console.log();
+        /**
+         * @description: 获取路由信息
+         * @param {*}
+         * @return {*}
+         */        
+        const routers = computed(() => {
+            return router.options.routes
+        })
+        return { showLogo, opened, backgroundColor, textColor, routers }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.wrap-sidebar{
+.wrap-sidebar {
     overflow-x: hidden !important;
 }
 </style>

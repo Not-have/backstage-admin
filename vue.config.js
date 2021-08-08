@@ -1,6 +1,5 @@
-const path = require('path')
 function resolve(dir) {
-    return path.join(__dirname, dir)
+    return require('path').join(__dirname, dir)
 }
 
 module.exports = {
@@ -8,6 +7,7 @@ module.exports = {
     productionSourceMap: false,
     devServer: {
         port: 8899,
+        hotOnly: true, // 热更新
         open: false,
         overlay: {
             warnings: false,
