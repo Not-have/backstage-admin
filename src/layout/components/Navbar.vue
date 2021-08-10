@@ -41,7 +41,6 @@ export default {
          */
         let toggleClick = () => {
             store.dispatch("app/toggleSideBar");
-
         }
         let opened = computed(() => {
             return !store.state.app.sidebar.opened

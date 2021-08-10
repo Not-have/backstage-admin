@@ -15,9 +15,13 @@
         "chalk": "^2.4.2",
         "echarts": "^5.1.2",
         "element-plus": "^1.0.2-beta.69",
+        "install": "^0.13.0",
         "mockjs": "1.0.1-beta3",
+        "npm": "^7.20.5",
+        "style-resources-loader": "^1.4.1",
         "three": "^0.130.1",
         "vue": "^3.0.0",
+        "vue-cli-plugin-style-resources-loader": "^0.1.5",
         "vue-router": "^4.0.0-0",
         "vuex": "^4.0.2"
     },

@@ -11,8 +11,11 @@
                     :index="resolvePath(onlyOneChild.path)"
                     :class="{'submenu-title-noDropdown':!isNest}"
                 >
-                    <i :class="item.meta.icon"></i>
-                    <span>{{item.meta.title}}</span>
+                    <i
+                        :class="item.meta.icon"
+                        class="sub-el-icon"
+                    ></i>
+                    <span class="text">{{item.meta.title}}</span>
                 </el-menu-item>
             </app-link>
         </template>
@@ -23,8 +26,11 @@
             popper-append-to-body
         >
             <template #title>
-                <i :class="item.meta.icon"></i>
-                <span>{{item.meta.title}}</span>
+                <i
+                    :class="item.meta.icon"
+                    class="sub-el-icon"
+                ></i>
+                <span class="text">{{item.meta.title}}</span>
             </template>
             <sidebar-item
                 v-for="child in item.children"
@@ -95,3 +101,10 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+.sub-el-icon{
+    color: currentColor;
+    width: 1em !important;
+    height: 1em !important;
+}
+</style>

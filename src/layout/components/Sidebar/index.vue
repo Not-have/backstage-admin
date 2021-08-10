@@ -10,7 +10,7 @@
                 :background-color="backgroundColor"
                 :text-color="textColor"
                 :unique-opened="false"
-                :collapse-transition="true"
+                :collapse-transition="false"
                 mode="vertical"
             >
                 <!-- 内部的结构树 -->
@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
-import Logo from "./Logo.vue"
+import { computed } from 'vue';
+import Logo from "./Logo.vue";
 import SidebarItem from "./SidebarItem.vue"
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
@@ -44,6 +44,11 @@ export default {
         let showLogo = computed(() => {
             return true
         })
+        /**
+         * @description: 侧边栏是否为展开状态
+         * @param {*}
+         * @return {*}
+         */
         let opened = computed(() => {
             return store.state.app.sidebar.opened
         })
@@ -77,5 +82,6 @@ export default {
 <style lang="scss" scoped>
 .wrap-sidebar {
     overflow-x: hidden !important;
+
 }
 </style>

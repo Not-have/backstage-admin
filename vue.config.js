@@ -1,5 +1,6 @@
+let path = require('path');
 function resolve(dir) {
-    return require('path').join(__dirname, dir)
+    return path.join(__dirname, dir)
 }
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
     productionSourceMap: false,
     devServer: {
         port: 8899,
-        hotOnly: true, // 热更新
+        hotOnly: false, // 热更新
         open: false,
         overlay: {
             warnings: false,
@@ -39,5 +40,13 @@ module.exports = {
                 symbolId: 'icon-[name]'
             })
             .end()
+    },
+    // 第三方插件配置（scss和它一样）
+    pluginOptions: {
+        'style-resources-loader': {
+            preProcessor: 'scss',
+            //在assets（静态资源文件夹）下创建全局样式文件；index.less 它就是less全局变量
+            patterns: [path.resolve(__dirname, './src/style/variables.scss')] // less所在文件路径
+        }
     }
 }
