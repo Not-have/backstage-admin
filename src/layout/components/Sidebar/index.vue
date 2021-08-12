@@ -82,6 +82,6 @@ export default {
 <style lang="scss" scoped>
 .wrap-sidebar {
     overflow-x: hidden !important;
-
+    
 }
 </style>

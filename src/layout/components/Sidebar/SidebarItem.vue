@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!item.hidden">
+    <div v-if="!item.hidden" class="internalBox">
         <template
             v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren) && !item.alwaysShow"
         >
@@ -30,7 +30,7 @@
                     :class="item.meta.icon"
                     class="sub-el-icon"
                 ></i>
-                <span class="text">{{item.meta.title}}</span>
+                <span class="text" v-show="titleShow">{{item.meta.title}}</span>
             </template>
             <sidebar-item
                 v-for="child in item.children"
@@ -48,6 +48,7 @@
 import path from 'path'
 import { isExternal } from '@/utils/validate'
 import AppLink from './Link'
+import { computed } from '@vue/runtime-core'
 export default {
     name: 'SidebarItem',
     components: { AppLink },
@@ -97,6 +98,12 @@ export default {
                 return this.basePath
             }
             return path.resolve(this.basePath, routePath)
+        }
+    },
+    computed:{
+        // 在关闭的时候，不显示文字
+        titleShow:function(){
+            return !this.$store.state.app.sidebar.opened
         }
     }
 }
