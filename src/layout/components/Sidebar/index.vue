@@ -80,7 +80,7 @@ export default {
 .scrollbar-wrapper {
     overflow-x: hidden !important;
 }
-/* 解决收起侧边栏的滚动条   */
+/* 解决收起侧边栏x轴的滚动条   */
 .sidebar >>> .is-horizontal{
     height: 0px !important;
     left: 0px !important;
