@@ -11,7 +11,7 @@
 
 <script>
 import { computed } from "vue";
-import {useRoute,useRouter} from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 export default {
     name: 'AppMain',
     setup() {
@@ -35,13 +35,19 @@ export default {
 .fixed-header + .app-main {
     padding-top: 50px;
 }
-</style>
 
-<style lang="scss">
-// 修复打开 el-dialog 中的 css 样式错误
-.el-popup-parent--hidden {
-    .fixed-header {
-        padding-right: 15px;
-    }
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+    transition: all 0.5s;
+}
+
+.fade-transform-enter {
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.fade-transform-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 </style>

@@ -62,6 +62,7 @@ export default {
     top: 0;
     left: #{$sideBarWidth};
     width: calc(100% - #{$sideBarWidth});
+    
 }
 
 /**
@@ -78,9 +79,11 @@ export default {
 /* 解决elementUI菜单的右边1px的空白 */
 .sidebar-container ::v-deep .el-menu {
     border: 0 !important;
-    
 }
 
+/**
+下面是收起的宽度 
+ */
 .whetherTheSidebarIsExpanded .sidebar-container {
     width: 54px !important;
     overflow-x: hidden;
