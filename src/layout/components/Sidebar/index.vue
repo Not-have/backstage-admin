@@ -1,25 +1,17 @@
 <template>
-    <div :class="{'has-logo':showLogo}">
+    <div :class="{'has-logo':showLogo}" class="sidebar">
         <!-- 侧边栏 -->
         <!-- <logo /> -->
         <!-- wrap-class	包裹容器的自定义类名 -->
-        <el-scrollbar class="wrap-sidebar">
-            <el-menu
-                :default-active="activeMenu()"
-                :collapse="opened"
-                :background-color="backgroundColor"
-                :text-color="textColor"
-                :unique-opened="false"
-                :collapse-transition="false"
-                mode="vertical"
-            >
+        <el-scrollbar wrap-class="scrollbar-wrapper">
+            <!-- 
+                default-active 当前激活菜单的 index
+                collapse 是否水平折叠收起菜单
+             -->
+            <el-menu :default-active="activeMenu()" :collapse="opened" :background-color="backgroundColor"
+                     :text-color="textColor" :unique-opened="false" :collapse-transition="false" mode="vertical">
                 <!-- 内部的结构树 -->
-                <sidebar-item
-                    v-for="router in routers"
-                    :key="router.path"
-                    :item="router"
-                    :base-path="router.path"
-                />
+                <sidebar-item v-for="router in routers" :key="router.path" :item="router" :base-path="router.path" />
             </el-menu>
         </el-scrollbar>
     </div>
@@ -67,6 +59,11 @@ export default {
         const routers = computed(() => {
             return router.options.routes
         })
+        /**
+         * @description: 当前激活菜单的 index
+         * @param {*}
+         * @return {*}
+         */
         function activeMenu() {
             const { meta, path } = route;
             if (meta.activeMenu) {
@@ -79,9 +76,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.wrap-sidebar {
+<style scoped>
+.scrollbar-wrapper {
     overflow-x: hidden !important;
-    
+}
+/* 解决收起侧边栏的滚动条   */
+.sidebar >>> .is-horizontal{
+    height: 0px !important;
+    left: 0px !important;
 }
 </style>

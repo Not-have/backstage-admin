@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!item.hidden" class="internalBox">
+    <div v-if="!item.hidden" class="sidebar-item">
         <template
             v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren) && !item.alwaysShow"
         >
@@ -46,9 +46,8 @@
 
 <script>
 import path from 'path'
-import { isExternal } from '@/utils/validate'
-import AppLink from './Link'
-import { computed } from '@vue/runtime-core'
+import { isExternal } from '@/utils/validate';
+import AppLink from './Link';
 export default {
     name: 'SidebarItem',
     components: { AppLink },
@@ -113,5 +112,8 @@ export default {
     color: currentColor;
     width: 1em !important;
     height: 1em !important;
+}
+.sidebar-item{
+    background: red !important;
 }
 </style>

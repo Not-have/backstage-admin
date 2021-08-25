@@ -20,7 +20,10 @@ components.forEach(component => {
 plugins.forEach(plugin => {
     app.use(plugin)
 })
-
+/**
+ * elementUI-plus全局样式的修改
+ */
+import "./style/element-plus.scss";
 /**
  * 导入svg图
  */

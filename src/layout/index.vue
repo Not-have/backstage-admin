@@ -43,7 +43,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/style/mixin.scss";
-@import "~@/style/element-plus.scss";
 .fixed-header {
     position: fixed;
     top: 0;
