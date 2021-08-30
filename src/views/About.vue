@@ -1,9 +1,10 @@
 <template>
     <div class="about">
-        sasasasaass
+        <span class="iconfont icon-cake-1"></span>
     </div>
 </template>
 <script>
+import "@/assets/icon/iconfont.css";
 import { onMounted } from 'vue';
 import { getList } from "@/api/table.ts"
 export default {
@@ -21,5 +22,8 @@ export default {
     width: 60px;
     height: 20px;
     margin-top: 15px;
+}
+.icon-cake-1{
+    color: black;
 }
 </style>

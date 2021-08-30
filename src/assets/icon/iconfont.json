@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "23949808",
+      "name": "cake-1",
+      "font_class": "cake-1",
+      "unicode": "e700",
+      "unicode_decimal": 59136
+    },
+    {
+      "icon_id": "23949809",
+      "name": "cezve",
+      "font_class": "cezve",
+      "unicode": "e701",
+      "unicode_decimal": 59137
+    },
+    {
+      "icon_id": "23949810",
+      "name": "cappuccino",
+      "font_class": "cappuccino",
+      "unicode": "e702",
+      "unicode_decimal": 59138
+    },
+    {
+      "icon_id": "23949811",
+      "name": "cake",
+      "font_class": "cake",
+      "unicode": "e703",
+      "unicode_decimal": 59139
+    },
+    {
+      "icon_id": "23949812",
+      "name": "coffee-cup-1",
+      "font_class": "coffee-cup-1",
+      "unicode": "e704",
+      "unicode_decimal": 59140
+    },
+    {
+      "icon_id": "23949813",
+      "name": "coffee-cup-2",
+      "font_class": "coffee-cup-2",
+      "unicode": "e705",
+      "unicode_decimal": 59141
+    }
+  ]
+}

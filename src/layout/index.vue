@@ -62,7 +62,6 @@ export default {
     top: 0;
     left: #{$sideBarWidth};
     width: calc(100% - #{$sideBarWidth});
-    
 }
 
 /**
