@@ -18,12 +18,16 @@ export default {
 }
 </script>
 <style scoped>
+.about {
+    height: 100%;
+    width: 100%;
+}
 .box {
     width: 60px;
     height: 20px;
     margin-top: 15px;
 }
-.icon-cake-1{
+.icon-cake-1 {
     color: black;
 }
 </style>

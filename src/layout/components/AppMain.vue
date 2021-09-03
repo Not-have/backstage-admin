@@ -26,12 +26,10 @@ export default {
 </script>
 
 <style scoped>
+@import "~@/style/scroll-bar.css";
 .app-main {
-    min-height: calc(100vh - 50px);
+    height: calc(100vh - 50px);
     width: 100%;
-    overflow: hidden;
-}
-.fixed-header + .app-main {
-    padding-top: 50px;
+    overflow: auto;
 }
 </style>

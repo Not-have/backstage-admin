@@ -9,7 +9,7 @@
                 <navbar />
             </div>
             <!-- 内容 -->
-            <app-main class="content" />
+            <app-main />
         </div>
     </div>
 </template>
@@ -39,25 +39,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$time: .3s;
 @import "~@/style/mixin.scss";
 /* 这个事展示 */
 .append-wrapper {
     position: relative;
+    top: 0;
     height: 100%;
     width: 100%;
+    left: 0;
+    overflow: hidden;
 }
 /* 这个是内容区域的样式 */
 .main-container {
     position: absolute;
     left: $sideBarWidth;
-    right: 0;
-    top: 0;
+    top: 50px;
     bottom: 0;
-    -webkit-transition: left 0.3s ease-in-out;
-    transition: left 0.3s ease-in-out;
+    -webkit-transition: left $time ease-in-out;
+    transition: left $time ease-in-out;
+    width:calc(100% - #{$sideBarWidth});
 }
 .whetherTheSidebarIsExpanded .main-container {
     left: 54px;
+    width:calc(100% - 54px);
 }
 /**
 侧边栏（.sidebar-container 这个是侧边栏的类名）：
@@ -65,7 +70,7 @@ export default {
 2、当侧边栏收缩之后，根据父级类名去决定的
 */
 .sidebar-container {
-    transition: width 0.3s ease-in-out;
+    transition: width $time ease-in-out;
     width: $sideBarWidth !important;
     height: 100%;
     background-color: $menuBg;
@@ -82,7 +87,7 @@ export default {
     right: 0;
     z-index: 9;
     width: calc(100% - #{$sideBarWidth});
-    transition: width 0.3s ease-in-out;
+    transition: width $time ease-in-out;
 }
 .whetherTheSidebarIsExpanded .fixed-header {
     width: calc(100% - 54px);
