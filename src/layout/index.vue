@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="append-wrapper"
-        :class="{'whetherTheSidebarIsExpanded':whetherTheSidebarIsExpanded}"
-    >
+    <div class="append-wrapper" :class="{'whetherTheSidebarIsExpanded':whetherTheSidebarIsExpanded}">
         <!-- 侧边栏 -->
         <sidebar class="sidebar-container" />
         <!-- 窗口 -->
@@ -43,57 +40,60 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/style/mixin.scss";
-.fixed-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
-    transition: width 0.28s;
-}
+/* 这个事展示 */
 .append-wrapper {
     position: relative;
     height: 100%;
     width: 100%;
 }
-.content {
+/* 这个是内容区域的样式 */
+.main-container {
     position: absolute;
-    height: 100%;
+    left: $sideBarWidth;
+    right: 0;
     top: 0;
-    left: #{$sideBarWidth};
-    width: calc(100% - #{$sideBarWidth});
+    bottom: 0;
+    -webkit-transition: left 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out;
 }
-
+.whetherTheSidebarIsExpanded .main-container {
+    left: 54px;
+}
 /**
 侧边栏（.sidebar-container 这个是侧边栏的类名）：
 1、侧边栏默认宽度事$sideBarWidth决定
 2、当侧边栏收缩之后，根据父级类名去决定的
 */
 .sidebar-container {
-    transition: width 0.28s;
+    transition: width 0.3s ease-in-out;
     width: $sideBarWidth !important;
     height: 100%;
     background-color: $menuBg;
+    float: left;
 }
+.whetherTheSidebarIsExpanded .sidebar-container {
+    width: 54px !important;
+}
+
+/* 这个事面包屑 */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: calc(100% - #{$sideBarWidth});
+    transition: width 0.3s ease-in-out;
+}
+.whetherTheSidebarIsExpanded .fixed-header {
+    width: calc(100% - 54px);
+}
+
+/* 以下事解决 ElementUI的 */
 /* 解决elementUI菜单的右边1px的空白 */
 .sidebar-container ::v-deep .el-menu {
     border: 0 !important;
 }
 
-/**
-下面是收起的宽度 
- */
-.whetherTheSidebarIsExpanded .sidebar-container {
-    width: 54px !important;
-    overflow-x: hidden;
-}
-.whetherTheSidebarIsExpanded .fixed-header {
-    width: calc(100% - 54px);
-}
-.whetherTheSidebarIsExpanded .content {
-    left: 54px;
-    width: calc(100% - 54px) !important;
-}
 .whetherTheSidebarIsExpanded
     .sidebar-container
     ::v-deep
